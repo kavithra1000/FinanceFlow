@@ -1,14 +1,22 @@
 'use client'
-
+import Image from 'next/image'
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Button } from '../ui/button'
 
 const Header = () => {
   return (
-    <header className="min-w-full flex-nowrap border-b border-zinc-900/20 flex w-full items-center justify-between gap-2 px-4 lg:px-10 xl:px-20 p-4 fixed backdrop-blur-2xl">
+    <header className="min-w-full flex-nowrap border-b border-zinc-900/20 flex w-full items-center justify-between gap-2 px-4 lg:px-10 xl:px-20 p-4 fixed z-1 backdrop-blur-2xl">
       {/* Logo or Home Link */}
-      <Link href='/' className="cursor-pointer">
+      <Link href='/' className="cursor-pointer flex items-center justify-center gap-2 pointer-events-none">
+
+      <Image
+        alt='logo'
+        src={'/logo.png'}
+        width={40}
+        height={40}
+      />
+
         <h1 className='font-extrabold text-xl'>FinanceFlow</h1>
       </Link>
 
