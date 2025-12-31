@@ -15,7 +15,7 @@ const Page = () => {
     
 
     return (
-        <main className={`${inter.className} min-h-screen flex flex-col scroll-smooth`}>
+        <main className={`${inter.className} h-screen flex flex-col scroll-smooth`}>
             <section className='flex-1'>
                 <Header />
                 <FileUpload setSelectedFiles={setSelectedFiles} selectedFiles={selectedFiles} />

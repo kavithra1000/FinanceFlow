@@ -6,7 +6,9 @@ import { Button } from '../ui/button'
 
 const Header = () => {
   return (
-    <header className="min-w-full flex-nowrap border-b border-zinc-900/20 flex w-full items-center justify-between gap-2 px-4 lg:px-10 xl:px-20 p-4 fixed z-1 backdrop-blur-2xl">
+    
+    <header className="min-w-full flex-nowrap flex w-full items-center justify-between gap-2 px-4 lg:px-10 xl:px-20 p-4 z-1  backdrop-blur-2xl">
+      {/*border-b border-zinc-900/20 */}
       {/* Logo or Home Link */}
       <Link href='/' className="cursor-pointer flex items-center justify-center gap-2 pointer-events-none">
 
