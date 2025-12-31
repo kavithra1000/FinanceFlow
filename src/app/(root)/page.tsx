@@ -1,8 +1,14 @@
-'use client'   
-
 
 import { Inter } from 'next/font/google'
-import Header from '@/components/doc/Header'
+import Header from '@/components/landing/Header'
+import Hero from '@/components/landing/Hero'
+import Upload from '@/components/landing/Upload'
+import Process from '@/components/landing/Process'
+import Features from '@/components/landing/Features'
+import Benefits from '@/components/landing/Benefits'
+import Trust from '@/components/landing/Trust'
+import FinalCTA from '@/components/landing/FinalCTA'
+import Footer from '@/components/landing/Footer'
 
 const inter = Inter({
   weight: ['400', '600'],
@@ -11,23 +17,17 @@ const inter = Inter({
 
 const Page = () => {
   return (
-    <div className={`${inter.className}`}>
+    <div className={`${inter.className} `}>
       <Header />
-      <br />
-      <h1>Convert Your Bank Statement</h1>
-      <p>Simply upload your PDF bank statement, and our AI will extract your transactions into a clean, editable table.</p>
+      <Hero />
+      <Upload />
+      <Process />
+      <Features />
+      <Benefits />
+      <Trust />
+      <FinalCTA />
+      <Footer />
 
-      <p>No file chosen</p>
-      <p>Drag & drop your PDF here</p>
-
-      <p>or</p>
-
-      <p>Click to Upload</p>
-      <p>Your data is processed securely and is not stored on our servers.</p>
-
-      <footer>
-        © 2025 Bank Statement AI. All rights reserved.
-      </footer>
     </div>
   )
 }
