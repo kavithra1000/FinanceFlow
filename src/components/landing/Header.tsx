@@ -15,9 +15,9 @@ const Header = () => {
       <div className="mx-auto flex items-center justify-between px-4 py-4 md:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image alt="logo" src="/logo1.png" width={30} height={30} />
+          <Image alt="logo" src="/logo.png" width={30} height={30} />
           <h1 className="text-xl font-extrabold">FinanceFlow</h1>
-        </Link>
+        </Link> 
 
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-8 md:flex">
