@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import { LuSparkles } from "react-icons/lu";
 import { FiCheckCircle } from "react-icons/fi";
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 
 const Hero = () => {
@@ -31,10 +32,13 @@ const Hero = () => {
             </p>
 
             {/* CTA */}
-            <Button size="lg" className="mt-20 font-semibold px-6 py-6 mx-auto text-md bg-linear-to-br from-emerald-600 to-green-600 shadow-xl ">
-                Get Started - <span className='text-sm font-normal'>it&apos;s free</span> 
-                <ArrowRight className='size-5'/>
-            </Button>
+            <Link href={"/doc"}>
+                <Button size="lg" className="mt-20 cursor-pointer font-semibold px-6 py-6 mx-auto text-md bg-linear-to-br from-emerald-600 to-green-600 shadow-xl ">
+                    Get Started - <span className='text-sm font-normal'>it&apos;s free</span>
+                    <ArrowRight className='size-5' />
+                </Button>
+            </Link>
+
 
             {/* Trust indicators */}
             <div className="mt-8  mx-auto flex flex-row font-medium flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-slate-600">
