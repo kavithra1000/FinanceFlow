@@ -8,8 +8,8 @@ const PricingSection = () => {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly")
 
   return (
-    <section className="px-5 py-32 max-w-5xl mx-auto text-center">
-      <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+    <section className="px-5 py-35 max-w-5xl mx-auto text-center">
+      <h2 className="text-3xl sm:text-6xl font-semibold text-slate-900">
         Simple, transparent pricing
       </h2>
       <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
