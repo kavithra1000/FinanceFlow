@@ -3,7 +3,11 @@
 
 import { redirect } from "next/navigation"
 
-export async function createCheckout(variantId: string, userId: string, email: string) {
+export async function createCheckout(
+  variantId: string,
+  userId: string,
+  email: string
+) {
   const response = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
     method: "POST",
     headers: {
@@ -18,14 +22,11 @@ export async function createCheckout(variantId: string, userId: string, email: s
           checkout_data: {
             custom: {
               user_id: userId,
-              email: email,
+              email,
             },
           },
         },
         relationships: {
-          store: {
-            data: { type: "stores", id: process.env.LEMON_SQUEEZY_STORE_ID },
-          },
           variant: {
             data: { type: "variants", id: variantId },
           },
@@ -34,8 +35,10 @@ export async function createCheckout(variantId: string, userId: string, email: s
     }),
   })
 
-  const checkout = await response.json()
-  const checkoutUrl = checkout.data.attributes.url
+  if (!response.ok) {
+    throw new Error("Failed to create checkout")
+  }
 
-  redirect(checkoutUrl) // sends the user to Lemon Squeezy checkout page
+  const checkout = await response.json()
+  redirect(checkout.data.attributes.url)
 }
