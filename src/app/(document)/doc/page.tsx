@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Inter } from 'next/font/google'
 import Header from '@/components/doc/Header'
 import FileUpload from '@/components/doc/FileUpload'
+import ResultModal from '@/components/doc/ResultModal'
 
 
 const inter = Inter({
@@ -19,6 +20,7 @@ const Page = () => {
             <section className='flex-1'>
                 <Header />
                 <FileUpload setSelectedFiles={setSelectedFiles} selectedFiles={selectedFiles} />
+                <ResultModal />
             </section>
 
         </main>
