@@ -1,13 +1,15 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useResultStore } from '@/stores/docStore'
+import { useResultStore } from '@/stores/useResultStore'
 import { RiDownload2Line } from 'react-icons/ri'
 import { IoWarningOutline, IoClose } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 
 const ResultModal = () => {
-  const { resultFile, clearResultFile } = useResultStore()
+
+  const { resultFile, summary, clearResult: clearResultFile } = useResultStore()
+
 
   // Always call useEffect, but skip logic if resultFile is null
   useEffect(() => {
@@ -43,6 +45,7 @@ const ResultModal = () => {
 
         {/* Close button */}
         <button
+          type='button'
           onClick={handleClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
         >
@@ -66,6 +69,22 @@ const ResultModal = () => {
             {(resultFile.size / 1024).toFixed(2)} KB
           </p>
         </div>
+
+        {summary?.failedFiles?.length ? (
+          <div className="bg-red-50 border border-red-200 rounded-md p-3 mb-4">
+            <p className="text-sm font-semibold text-red-700 mb-2">Failed PDFs:</p>
+            <ul className="list-disc list-inside text-sm text-red-600 space-y-1">
+              {summary.failedFiles.map((f, i) => (
+                <li key={i}>
+                  <span className="font-medium">{f?.fileName}</span>
+                  <span className="text-xs text-red-500"> – {f?.error}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+
 
         {/* Warning */}
         <div className="flex items-start gap-2 rounded-md bg-amber-100 px-2 py-2 text-amber-600 text-sm mb-6">
