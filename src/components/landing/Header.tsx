@@ -70,6 +70,13 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden items-center gap-6 md:flex">
+
+            <Link
+              href="/"
+              className="text-sm font-medium text-gray-600 hover:text-black transition-colors duration-200"
+            >
+              Home
+            </Link>
             <Link
               href="/price"
               className="text-sm font-medium text-gray-600 hover:text-black transition-colors duration-200"
@@ -121,6 +128,15 @@ const Header = () => {
               }}
             >
               <div className="flex flex-col gap-2 p-4">
+
+                <Link
+                  href="/"
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-200 px-2 py-1.5 rounded-lg hover:bg-gray-50"
+                >
+                  Home
+                </Link>
+                
                 <Link
                   href="/price"
                   onClick={() => setOpen(false)}
