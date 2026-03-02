@@ -10,7 +10,7 @@ const Hero = () => {
     return (
         <section className="text-center  px-5">
             {/* Badge */}
-            <div className="mt-30 mx-auto rounded-full inline-flex bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700 ">
+            <div className="mt-20 mx-auto rounded-full inline-flex bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700 ">
                 <p className='animate-pulse inline-flex items-center gap-2 '>
                     <LuSparkles className="h-4 w-4" />
                     AI-Powered Extraction
