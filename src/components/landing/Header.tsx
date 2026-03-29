@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Button } from '../ui/button'
 import { Menu, X } from 'lucide-react'
+import { SignUpButton } from '@clerk/nextjs'
+import { navigate } from 'next/dist/client/components/segment-cache/navigation'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -77,18 +79,11 @@ const Header = () => {
               Pricing
             </Link>
 
-            <SignedOut>
-              <SignInButton>
-                <Button variant="outline" size="sm">Sign In</Button>
-              </SignInButton>
-            </SignedOut>
-
-            <SignedIn>
-              <div className="flex items-center gap-3">
-                <Button variant="outline" size="sm">Subscribe ✨</Button>
-                <UserButton />
-              </div>
-            </SignedIn>
+            <Link href="/doc">
+              <Button variant="outline" size="sm">
+                Sign Up
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile: Hamburger only */}
@@ -131,23 +126,9 @@ const Header = () => {
 
                 <div className="h-px bg-gray-100 my-1" />
 
-                <SignedOut>
-                  <SignInButton>
-                    <Button variant="outline" className="w-full" size="sm">
-                      Sign In
-                    </Button>
-                  </SignInButton>
-                </SignedOut>
-
-                <SignedIn>
-                  <Button variant="outline" className="w-full" size="sm">
-                    Subscribe ✨
-                  </Button>
-                  <div className="flex items-center gap-3 px-2 py-1.5">
-                    <UserButton />
-                    <span className="text-sm text-gray-600">My Account</span>
-                  </div>
-                </SignedIn>
+                <Button variant="outline" className="w-full" size="sm">
+                  Sign Up
+                </Button>
               </div>
             </div>
           </div>
