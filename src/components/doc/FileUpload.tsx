@@ -85,34 +85,53 @@ const FileUpload = () => {
       {error && <ErrorMessage message={error} />}
 
       <div
-        className={`flex flex-col w-full justify-center ${
-          selectedFiles.length > 0 ? 'lg:flex-row-reverse lg:h-[75vh] gap-4 xl:gap-8' : ''
-        }`}
+        className={`flex flex-col w-full justify-center ${selectedFiles.length > 0 ? 'lg:flex-row-reverse lg:h-[75vh] gap-4 xl:gap-8' : ''
+          }`}
       >
         {/* Upload Card + Convert Button */}
-        <div className="md:p-5">
+        <div className="lg:pl-5">
           <UploadCard />
 
+
+
+          <div className="max-w-4xl mx-auto mt-6 flex flex-col justify-center items-center gap-3 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-900 border border-emerald-200 shadow-sm">
+
+            <p className="leading-relaxed ">
+              📌 All uploaded files are processed into a single consolidated Excel file. <br />
+              📌 We never store or retain your data on our servers. <br />
+              <span className=" text-emerald-700">
+                📌 Your privacy is our top priority.
+              </span>
+            </p>
+          </div>
+
+
           {selectedFiles.length > 0 && (
-            <button
-              type="button"
-              onClick={handleConvert}
-              disabled={loading}
-              className={`mt-6 px-8 py-3 rounded-xl bg-green-600 text-white font-semibold
+            <>
+              <button
+                type="button"
+                onClick={handleConvert}
+                disabled={loading}
+                className={`mt-6 px-8 py-3 rounded-xl bg-green-600 text-white font-semibold
                 flex items-center justify-center gap-2 w-full shadow-md
                 hover:bg-green-700 active:scale-[0.98] transition-all
                 ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
-            >
-              <RiFileExcel2Fill className="size-6" />
-              {loading ? 'Converting…' : 'Convert to Excel'}
-            </button>
+              >
+                <RiFileExcel2Fill className="size-6" />
+                {loading ? 'Converting…' : 'Convert to Excel'}
+              </button>
+            </>
           )}
         </div>
 
-        {selectedFiles.length > 0 && <div className="border border-gray-300" />}
+        {/*selectedFiles.length > 0 && <div className="border border-gray-300" />*/}
 
         {/* Selected Files List */}
-        {selectedFiles.length > 0 && <FileListCard />}
+        {selectedFiles.length > 0 &&
+          <div className='w-full lg:max-w-xl xl:max-w-2xl h-full border shadow-md rounded-xl p-5'>
+            <FileListCard />
+          </div>
+        }
       </div>
 
       {/* Hidden File Input */}
