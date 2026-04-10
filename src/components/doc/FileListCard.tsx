@@ -13,9 +13,23 @@ const FileListCard = () => {
 
   return (
 
-    <div className=" flex flex-col gap-3 md:p-4 bg-white rounded-xl w-full lg:max-w-xl xl:max-w-2xl h-full">
-      <h2 className="font-semibold text-gray-700">Selected Files ({selectedFiles.length})</h2>
-      <div className="grid lg:grid-cols-1 grid-cols-1 sm:grid-cols-2 gap-2 ">
+    <div className="flex flex-col h-full animate-in fade-in duration-700">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-8 bg-emerald-500 rounded-full" />
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 tracking-tight">Processing Queue</h2>
+            <p className="text-xs text-gray-400 font-medium uppercase tracking-widest leading-none mt-1">
+              Ready for extraction
+            </p>
+          </div>
+        </div>
+        <div className="bg-emerald-50 text-emerald-700 font-bold px-4 py-1.5 rounded-xl text-sm border border-emerald-100 shadow-sm">
+          {selectedFiles.length} {selectedFiles.length === 1 ? 'Statement' : 'Statements'}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-2 overflow-y-auto pr-2 max-h-[480px] xl:max-h-[65vh] scrollbar-thin scrollbar-thumb-gray-200">
         {selectedFiles.map((file, i) => (
           <FileItem key={i} file={file} onRemove={() => removeFile(file)} />
         ))}
