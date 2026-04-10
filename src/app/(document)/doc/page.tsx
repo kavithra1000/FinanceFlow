@@ -1,7 +1,7 @@
 'use client'
 
 import { Inter } from 'next/font/google'
-import Header from '@/components/landing/Header'
+import Header from '@/components/doc/Header'
 import FileUpload from '@/components/doc/FileUpload'
 import ResultModal from '@/components/doc/ResultModal'
 
