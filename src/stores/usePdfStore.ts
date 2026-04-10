@@ -20,7 +20,7 @@ export const usePdfStore = create<PdfStore>((set, get) => ({
   error: '',
   loading: false,
   MAX_FILES: 10,
-  MAX_FILE_SIZE_MB: 10,
+  MAX_FILE_SIZE_MB: 50,
 
   setError: (err) => set({ error: err }),
   setLoading: (loading) => set({ loading }),
