@@ -2,7 +2,7 @@ import { Shield, Lock, Trash2 } from 'lucide-react'
 
 const Trust = () => {
   return (
-    <section className="mt-32 px-5 py-20 bg-slate-50">
+    <section className="mt-22 px-5 py-20 bg-slate-50">
       <div className="mx-auto max-w-6xl">
         
         {/* Header */}
