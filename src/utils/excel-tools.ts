@@ -9,3 +9,8 @@ export function createExcelBuffer(data: TransactionRow[]): Buffer {
 
   return XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
 }
+
+export function createCsvBuffer(data: TransactionRow[]): string {
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  return XLSX.utils.sheet_to_csv(worksheet);
+}

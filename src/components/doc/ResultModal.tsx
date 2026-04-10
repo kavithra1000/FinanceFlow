@@ -9,6 +9,7 @@ import { useState } from 'react'
 const ResultModal = () => {
   const { transactions, summary, isExporting, setIsExporting, clearResult } = useResultStore()
   const [error, setError] = useState('')
+  const [exportFormat, setExportFormat] = useState('xlsx')
 
   const handleExport = async () => {
     if (transactions.length === 0) return
@@ -20,7 +21,7 @@ const ResultModal = () => {
       const response = await fetch('/api/export', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(transactions),
+        body: JSON.stringify({ transactions, format: exportFormat }),
       })
 
       if (!response.ok) throw new Error('Failed to generate Excel file')
@@ -30,7 +31,7 @@ const ResultModal = () => {
       
       const a = document.createElement('a')
       a.href = url
-      a.download = 'statements.xlsx'
+      a.download = `statements.${exportFormat}`
       a.click()
       
       URL.revokeObjectURL(url)
@@ -58,7 +59,7 @@ const ResultModal = () => {
               Preview & Export
             </h2>
             <p className="text-sm text-gray-500 mt-1">
-              Verify extracted data before downloading your Excel file.
+              Verify extracted data before downloading your {exportFormat.toUpperCase()} file.
             </p>
           </div>
           <button
@@ -111,7 +112,20 @@ const ResultModal = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-800">Extracted Transactions</h3>
-              <p className="text-xs text-gray-400 italic">Rows are editable</p>
+              <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
+                {(['xlsx', 'csv', 'json'] as const).map((format) => (
+                  <button
+                    key={format}
+                    onClick={() => setExportFormat(format)}
+                    className={`px-3 py-1 text-xs font-semibold rounded-md transition-all uppercase
+                      ${exportFormat === format 
+                        ? 'bg-white text-green-600 shadow-sm' 
+                        : 'text-gray-500 hover:text-gray-700'}`}
+                  >
+                    {format}
+                  </button>
+                ))}
+              </div>
             </div>
             
             <TransactionTable />
@@ -127,7 +141,7 @@ const ResultModal = () => {
         {/* Footer */}
         <div className="px-8 py-6 border-t border-gray-100 bg-gray-50 flex items-center justify-between gap-4">
           <p className="text-xs text-gray-500 max-w-xs">
-            Review your data carefully. Changes made here will be reflected in the final Excel document.
+            Review your data carefully. Changes made here will be reflected in the final {exportFormat.toUpperCase()} document.
           </p>
           <div className="flex gap-4">
             <button
@@ -144,7 +158,7 @@ const ResultModal = () => {
                 hover:bg-green-700 active:scale-[0.98]
                 ${(isExporting || transactions.length === 0) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              {isExporting ? 'Generating...' : 'Download Excel'}
+              {isExporting ? 'Generating...' : `Download ${exportFormat.toUpperCase()}`}
               <RiDownload2Line size={20} />
             </button>
           </div>

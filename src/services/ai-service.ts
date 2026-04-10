@@ -6,28 +6,46 @@ const client = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!
 });
 
-export async function getStructuredData(rawText: string, retryCount = 0): Promise<TransactionRow[]> {
+export async function getStructuredData(
+  rawText: string,
+  fileBuffer?: Buffer,
+  retryCount = 0
+): Promise<TransactionRow[]> {
   try {
+    const parts: any[] = [
+      {
+        text: `You are a bank statement parser. Extract ALL transactions into a JSON array.
+               Rules:
+               1. Return ONLY a JSON object with key "transactions".
+               2. Each transaction: {"date": "YYYY-MM-DD", "description": "text", "debit": number, "credit": number, "balance": number}.
+               3. Use 0 if a debit or credit value is missing.
+               4. For scanned documents, use your visual capability to read the text accurately.`
+      }
+    ];
+
+    // If text is poor or missing, and we have a buffer, use visual processing
+    if (fileBuffer && rawText.length < 100) {
+      parts.push({
+        inlineData: {
+          data: fileBuffer.toString('base64'),
+          mimeType: 'application/pdf',
+        },
+      });
+    } else {
+      parts.push({ text: `Text Content:\n${rawText}` });
+    }
+
     const response = await client.models.generateContent({
-      model: 'gemini-2.5-flash-lite',
+      model: 'gemini-2.5-flash-lite', // Highly optimized for multimodal extraction
       contents: [{
         role: 'user',
-        parts: [{
-          text: `You are a bank statement parser. Extract transactions into a JSON array.
-                 Rules:
-                 1. Return ONLY a JSON object with key "transactions".
-                 2. Each transaction: {"date": "YYYY-MM-DD", "description": "text", "debit": number, "credit": number, "balance": number}.
-                 3. Use 0 if a debit or credit value is missing.
-                 4. Text: ${rawText}`
-        }]
+        parts: parts
       }],
       config: {
-        // Updated to camelCase for the latest 2025 SDK
         responseMimeType: 'application/json',
       }
     });
 
-    // The SDK provides the .text property directly on the response
     const outputText = response.text;
     
     if (!outputText) {
@@ -35,8 +53,6 @@ export async function getStructuredData(rawText: string, retryCount = 0): Promis
     }
 
     const parsed = JSON.parse(outputText);
-    
-    // Safety check to ensure we return an array
     return (parsed.transactions as TransactionRow[]) || [];
 
   } catch (error: unknown) {
@@ -47,7 +63,7 @@ export async function getStructuredData(rawText: string, retryCount = 0): Promis
         const waitTime = Math.pow(2, retryCount) * 2000;
         console.log(`[Quota] Rate limit hit. Retrying in ${waitTime / 1000}s...`);
         await new Promise(res => setTimeout(res, waitTime));
-        return getStructuredData(rawText, retryCount + 1);
+        return getStructuredData(rawText, fileBuffer, retryCount + 1);
       }
     }
     

@@ -18,17 +18,8 @@ export async function processFilesBatch(files: File[]): Promise<{ success: Trans
       const buffer = Buffer.from(await file.arrayBuffer());
       const rawText = await extractTextFromBuffer(buffer);
 
-      if (requiresOCR(rawText)) {
-        // If OCR is required, log the failure with a specific message
-        failedFiles.push({
-          fileName: file.name,
-          error: 'OCR_NOT_SUPPORTED: This PDF appears to be scanned. OCR is not supported yet.',
-        });
-        continue; // Skip this file
-      }
-
       const cleanedText = cleanExtractedText(rawText);
-      const transactions = await getStructuredData(cleanedText);
+      const transactions = await getStructuredData(cleanedText, buffer);
 
       // Validate and filter out any invalid transactions
       const valid = transactions
