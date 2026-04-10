@@ -1,200 +1,139 @@
 'use client'
 
-import React, { useState } from 'react'
-import { IoCloseSharp } from "react-icons/io5"
-import { Item, ItemActions, ItemContent, ItemTitle } from '../ui/item'
-import { FaFilePdf } from "react-icons/fa6"
-import { FaCloudUploadAlt } from "react-icons/fa"
-import { RiFileExcel2Fill } from "react-icons/ri"
+import React from 'react'
+import { RiFileExcel2Fill } from 'react-icons/ri'
+import UploadCard from './UploadCard'
+import FileListCard from './FileListCard'
 import ErrorMessage from './ErrorMessage'
+import { usePdfStore } from '@/stores/usePdfStore'
+import { useResultStore } from '@/stores/useResultStore'
 
-interface FileUploadProps {
-  setSelectedFiles: (files: File[]) => void
-  selectedFiles: File[]
-}
+const FileUpload = () => {
+  // -------------------- PDF Store --------------------
+  const selectedFiles = usePdfStore(state => state.selectedFiles)
+  const error = usePdfStore(state => state.error)
+  const loading = usePdfStore(state => state.loading)
+  const addFiles = usePdfStore(state => state.addFiles)
+  const setError = usePdfStore(state => state.setError)
+  const setLoading = usePdfStore(state => state.setLoading)
 
-const MAX_FILES = 10
+  // -------------------- Result Store --------------------
+  const setResult = useResultStore(state => state.setResult)
 
-const FileUpload: React.FC<FileUploadProps> = ({ setSelectedFiles, selectedFiles }) => {
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-
-  const addFiles = (files: File[]) => {
-    if (selectedFiles.length + files.length > MAX_FILES) {
-      setError(`You can only upload up to ${MAX_FILES} files.`)
-      return
-    }
-    setError('')
-    setSelectedFiles([...selectedFiles, ...files])
-  }
-
+  // -------------------- Handlers --------------------
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) addFiles(Array.from(e.target.files))
+    if (!e.target.files) return
+    addFiles(Array.from(e.target.files))
+    e.target.value = '' // allow re-selecting the same file
   }
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setIsDragging(false)
-    addFiles(Array.from(e.dataTransfer.files))
-  }
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = () => setIsDragging(false)
-
-  const handleRemoveFile = (fileToRemove: File) => {
-    setSelectedFiles(selectedFiles.filter(file => file !== fileToRemove))
-    setError('')
-  }
-
-  const isMaxReached = selectedFiles.length >= MAX_FILES
 
   const handleConvert = async () => {
     if (selectedFiles.length === 0) {
-      setError('Please upload at least one PDF file.')
+      setError('Please upload at least one PDF.')
       return
     }
 
     setLoading(true)
+    setError('')
+
     try {
       const formData = new FormData()
       selectedFiles.forEach(file => formData.append('files', file))
 
       const response = await fetch('/api/convert', {
         method: 'POST',
-        body: formData
+        body: formData,
       })
 
-      if (!response.ok) throw new Error('Failed to convert files.')
+      const data = await response.json()
 
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = 'statements.xlsx'
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      window.URL.revokeObjectURL(url)
-    } catch (err: unknown) {
-      if (err instanceof Error) setError(err.message)
-      else setError('Unknown error occurred.')
+      setResult(
+        null, // No file blob yet
+        data.summary,
+        data.transactions
+      )
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong.')
     } finally {
       setLoading(false)
     }
   }
 
+  // -------------------- Render --------------------
   return (
-    <div className="flex flex-col items-center justify-center pt-30 px-10">
-      <h1 className='mt-8 font-semibold text-4xl max-w-4xl text-center'>
-        Upload your PDF bank statement
-      </h1>
+    <div className="relative flex flex-col items-center min-h-[calc(100vh-80px)] p-6 lg:p-12 overflow-hidden">
+      
+      {/* Background Glow Decorations */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-green-200/20 blur-[120px] rounded-full -z-10" />
+      <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-emerald-100/30 blur-[100px] rounded-full -z-10" />
 
-      {error && <ErrorMessage message={error} />}
-
-      <div
-        className={`
-          w-full max-w-4xl mt-12 py-15
-          flex flex-col items-center justify-center gap-4
-          rounded-2xl border-2 border-dashed
-          ${isDragging ? 'border-green-500 bg-green-50' : 'border-gray-300 bg-linear-to-br from-green-50 to-green-100'}
-          transition-all duration-300
-          ${isMaxReached ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-        `}
-        onDrop={isMaxReached ? undefined : handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onClick={() => !isMaxReached && document.getElementById('fileInput')?.click()}
-      >
-        <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600">
-          <FaCloudUploadAlt size={28} />
-        </div>
-
-        <div className="text-center space-y-1">
-          <p className="text-lg font-semibold text-gray-800">
-            Drag & drop your PDFs
+      {/* Hero Section */}
+      {selectedFiles.length === 0 && (
+        <div className="text-center max-w-3xl mb-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-emerald-800 to-gray-700">
+            Precision Banking <br /> Made Simple.
+          </h1>
+          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl leading-relaxed">
+            Convert complex PDF bank statements into structured Excel sheets in seconds. 
+            Powered by Gemini AI for 100% accurate transaction parsing.
           </p>
-          <p className="text-sm text-gray-500">
-            Bank statements only · Up to {MAX_FILES} files
-          </p>
-        </div>
-
-        <div className="flex items-center w-full gap-3 px-20">
-          <div className="flex-1 h-px bg-gray-300" />
-          <span className="text-sm text-gray-400 whitespace-nowrap">or</span>
-          <div className="flex-1 h-px bg-gray-300" />
-        </div>
-
-        <button
-          type="button"
-          disabled={isMaxReached}
-          className={`
-            px-4 py-2
-            rounded-md
-            text-green-600 font-medium
-            border-2 border-green-600 bg-white
-            transition
-            ${isMaxReached ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-200 cursor-pointer'}
-          `}
-        >
-          {selectedFiles.length > 0 ? 'Add more files' : 'Browse files'}
-        </button>
-      </div>
-
-      {selectedFiles.length > 0 && (
-        <div className="my-15 text-center">
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {selectedFiles.map((file, index) => (
-              <Item key={index} variant="outline" className='py-2 px-3 gap-2 shadow-lg rounded-full bg-linear-to-br from-green-50 to-green-100'>
-                <ItemContent className='flex flex-row items-center justify-start gap-3 font-bold'>
-                  <FaFilePdf className='text-red-500' />
-                  <ItemTitle className='font-semibold max-w-45 text-start line-clamp-1'>{file.name}</ItemTitle>
-                </ItemContent>
-                <ItemActions>
-                  <button
-                    className="text-red-500 hover:text-red-700 font-semibold text-lg p-1 border rounded-full"
-                    onClick={() => handleRemoveFile(file)}
-                  >
-                    <IoCloseSharp size={15} />
-                  </button>
-                </ItemActions>
-              </Item>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            disabled={loading}
-            onClick={handleConvert}
-            className={`
-              mt-20 mx-auto
-              px-8 py-3.5
-              rounded-xl
-              bg-linear-to-r from-green-600 to-green-700
-              text-white font-semibold
-              flex items-center gap-3
-              shadow-lg shadow-green-500/30
-              hover:from-green-700 hover:to-green-800
-              hover:shadow-green-600/40
-              active:scale-[0.98]
-              transition-all duration-100 cursor-pointer
-              ${loading ? 'opacity-60 cursor-not-allowed' : ''}
-            `}
-          >
-            <RiFileExcel2Fill className="size-6" />
-            {loading ? 'Converting...' : 'Convert to Excel'}
-          </button>
         </div>
       )}
 
+      {error && (
+        <div className="w-full max-w-2xl animate-in zoom-in-95 duration-300">
+          <ErrorMessage message={error} />
+        </div>
+      )}
+
+      <div
+        className={`flex flex-col w-full max-w-7xl justify-center items-start transition-all duration-700 gap-12 ${
+          selectedFiles.length > 0 ? 'lg:flex-row-reverse' : ''
+        }`}
+      >
+        {/* Upload Card Area */}
+        <div className={`w-full transition-all duration-500 ${selectedFiles.length > 0 ? 'lg:w-[400px] sticky top-8' : 'max-w-4xl mx-auto'}`}>
+          <div className="relative group">
+            <UploadCard />
+            
+            {selectedFiles.length > 0 && (
+              <div className="mt-8 space-y-4 animate-in fade-in slide-in-from-top-2 duration-500">
+                <button
+                  type="button"
+                  onClick={handleConvert}
+                  disabled={loading}
+                  className={`group relative overflow-hidden px-8 py-4 rounded-2xl bg-gray-900 text-white font-bold
+                    flex items-center justify-center gap-3 w-full shadow-2xl shadow-gray-200
+                    hover:scale-[1.02] active:scale-[0.98] transition-all
+                    ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <RiFileExcel2Fill className="size-6 relative z-10" />
+                  <span className="relative z-10">
+                    {loading ? 'Processing Data…' : 'Finalize & Convert'}
+                  </span>
+                </button>
+                <p className="text-center text-xs text-gray-500">
+                  Multiple statements will be consolidated into a single Excel file.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Selected Files Hub */}
+        {selectedFiles.length > 0 && (
+          <div className="flex-1 w-full animate-in fade-in slide-in-from-left-8 duration-700">
+            <FileListCard />
+          </div>
+        )}
+      </div>
+
+      {/* Hidden File Input */}
       <input
         id="fileInput"
         type="file"
-        accept=".pdf"
+        accept="application/pdf"
         multiple
         onChange={handleFileChange}
         className="hidden"

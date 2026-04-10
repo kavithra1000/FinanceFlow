@@ -1,7 +1,9 @@
 'use client'
-import { useState } from 'react'
+
 import { Inter } from 'next/font/google'
-import Header from '@/components/doc/Header'
+import Header from '@/components/landing/Header'
+import FileUpload from '@/components/doc/FileUpload'
+import ResultModal from '@/components/doc/ResultModal'
 
 
 const inter = Inter({
@@ -9,14 +11,13 @@ const inter = Inter({
     subsets: ['latin'],
 })
 
-const Page = () => {
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-    
-
+const Page = () => {    
     return (
-        <main className={`${inter.className} min-h-screen flex flex-col scroll-smooth`}>
+        <main className={`${inter.className} h-screen flex flex-col scroll-smooth`}>
             <section className='flex-1'>
                 <Header />
+                <FileUpload />
+                <ResultModal />
             </section>
 
         </main>
