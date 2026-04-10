@@ -13,13 +13,8 @@ const inter = Inter({
 
 const Page = () => {    
     return (
-        <main className={`${inter.className} h-screen flex flex-col scroll-smooth`}>
-            <section className='flex-1'>
-                <Header />
-                <FileUpload />
-                <ResultModal />
-            </section>
-
+        <main >
+            dashboard
         </main>
     )
 }
