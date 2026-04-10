@@ -45,26 +45,12 @@ const FileUpload = () => {
         body: formData,
       })
 
-      if (!response.ok) throw new Error('Failed to convert files.')
-
-      const blob = await response.blob()
-
-      const successCount = Number(response.headers.get('X-Success-Count'))
-      const failedCount = Number(response.headers.get('X-Failed-Count'))
-      const failedFiles = JSON.parse(response.headers.get('X-Failed-Files') || '[]')
+      const data = await response.json()
 
       setResult(
-        {
-          name: 'statements.xlsx',
-          url: URL.createObjectURL(blob),
-          size: blob.size,
-          type: blob.type,
-        },
-        {
-          successCount,
-          failedCount,
-          failedFiles,
-        }
+        null, // No file blob yet
+        data.summary,
+        data.transactions
       )
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.')
