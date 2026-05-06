@@ -8,15 +8,11 @@ import { Menu, X } from 'lucide-react'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsMounted(true)
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
@@ -39,27 +35,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`${scrolled ? 'md:w-[60%] w-[92%] ' : 'w-screen'}`}
-        style={{
-          position: 'fixed',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 50,
-          top: scrolled ? '16px' : '0px',
-          maxWidth: scrolled ? '72rem' : '100%',
-          borderRadius: scrolled ? '9999px' : '0px',
-          backgroundColor: scrolled ? 'rgba(255,255,255,0.80)' : 'rgba(255,255,255,0.95)',
-          backdropFilter: 'blur(14px)',
-          boxShadow: scrolled ? '0 4px 28px rgba(0,0,0,0.10)' : '0 1px 0 rgba(0,0,0,0.07)',
-          transition: [
-            'top 0.5s cubic-bezier(0.4,0,0.2,1)',
-            'width 0.5s cubic-bezier(0.4,0,0.2,1)',
-            'max-width 0.5s cubic-bezier(0.4,0,0.2,1)',
-            'border-radius 0.5s cubic-bezier(0.4,0,0.2,1)',
-            'box-shadow 0.5s cubic-bezier(0.4,0,0.2,1)',
-            'background-color 0.5s cubic-bezier(0.4,0,0.2,1)',
-          ].join(', '),
-        }}
+        className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
       >
         <div className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8 md:py-4">
           {/* Logo */}

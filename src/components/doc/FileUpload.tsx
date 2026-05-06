@@ -2,6 +2,8 @@
 
 import React from 'react'
 import { RiFileExcel2Fill } from 'react-icons/ri'
+import { LuSparkles } from "react-icons/lu";
+import { FiCheckCircle } from "react-icons/fi";
 import UploadCard from './UploadCard'
 import FileListCard from './FileListCard'
 import ErrorMessage from './ErrorMessage'
@@ -69,14 +71,34 @@ const FileUpload = () => {
 
       {/* Hero Section */}
       {selectedFiles.length === 0 && (
-        <div className="text-center max-w-3xl mb-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
-          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-emerald-800 to-gray-700">
-            Precision Banking <br /> Made Simple.
+        <div className="text-center max-w-4xl mb-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          {/* Badge */}
+          <div className="mb-6 rounded-full inline-flex bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700">
+            <p className="animate-pulse inline-flex items-center gap-2">
+              <LuSparkles className="h-4 w-4" />
+              AI-Powered Extraction
+            </p>
+          </div>
+
+          <h1 className="text-4xl sm:text-3xl lg:text-6xl font-semibold text-slate-900 leading-tight mb-6">
+            Precision Banking <br />
+            <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+              Made Simple
+            </span>
           </h1>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl leading-relaxed">
-            Convert complex PDF bank statements into structured Excel sheets in seconds. 
-            Powered by Gemini AI for 100% accurate transaction parsing.
-          </p>
+
+
+          {/* Trust Indicators */}
+          <div className="flex flex-row font-medium flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-slate-600">
+            <span className="flex items-center gap-2">
+              <FiCheckCircle className="w-4 h-4 text-green-600" />
+              Secure processing
+            </span>
+            <span className="flex items-center gap-2">
+              <FiCheckCircle className="w-4 h-4 text-green-600" />
+              No data storage
+            </span>
+          </div>
         </div>
       )}
 
@@ -107,7 +129,7 @@ const FileUpload = () => {
                     hover:scale-[1.02] active:scale-[0.98] transition-all
                     ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <RiFileExcel2Fill className="size-6 relative z-10" />
                   <span className="relative z-10">
                     {loading ? 'Processing Data…' : 'Finalize & Convert'}

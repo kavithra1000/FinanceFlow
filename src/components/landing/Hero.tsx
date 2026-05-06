@@ -8,7 +8,11 @@ import Link from 'next/link';
 
 const Hero = () => {
     return (
-        <section className="text-center  px-5">
+        <section className="relative text-center px-5 overflow-hidden py-10">
+            {/* Background Glow Decorations */}
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-green-200/10 blur-[120px] rounded-full -z-10" />
+            <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-emerald-100/20 blur-[100px] rounded-full -z-10" />
+
             {/* Badge */}
             <div className="mt-20 mx-auto rounded-full inline-flex bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700 ">
                 <p className='animate-pulse inline-flex items-center gap-2 '>
@@ -20,7 +24,7 @@ const Hero = () => {
             {/* Heading */}
             <h1 className="mt-4 sm:mt-5 mx-auto max-w-4xl text-4xl font-semibold text-slate-900 leading-tight sm:text-5xl lg:text-6xl">
                 Convert Bank Statement PDFs to{" "}
-                <span className="bg-linear-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
                     Excel in Seconds
                 </span>
             </h1>
@@ -33,7 +37,7 @@ const Hero = () => {
 
             {/* CTA */}
             <Link href={"/doc"}>
-                <Button size="lg" className="mt-20 cursor-pointer font-semibold px-6 py-6 mx-auto text-md bg-linear-to-br from-emerald-600 to-green-600 shadow-xl ">
+                <Button size="lg" className="mt-20 cursor-pointer font-semibold px-6 py-6 mx-auto text-md bg-gradient-to-br from-emerald-600 to-green-600 shadow-xl ">
                     Get Started - <span className='text-sm font-normal'>it&apos;s free</span>
                     <ArrowRight className='size-5' />
                 </Button>
@@ -41,7 +45,7 @@ const Hero = () => {
 
 
             {/* Trust indicators */}
-            <div className="mt-8  mx-auto flex flex-row font-medium flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-slate-600">
+            <div className="mt-8 mb-20 mx-auto flex flex-row font-medium flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-slate-600">
                 <span className='flex items-center justify-start gap-2 text-sm sm:text-md'>
                     <FiCheckCircle className="w-5 h-5 text-green-600 font-bold" />
                     No bank card required
