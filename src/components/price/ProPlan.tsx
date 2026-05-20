@@ -13,7 +13,29 @@ export const ProPlan = ({ billing }: { billing: "monthly" | "yearly" }) => {
 
   const handleUpgrade = async () => {
     if (!user) return alert("Please log in first")
+
     setLoading(true)
+
+    try {
+      const customerEmail = user.emailAddresses?.[0]?.emailAddress ?? undefined
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ billing, customerEmail }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok || !data.checkoutUrl) {
+        throw new Error(data?.error || 'Unable to create checkout session')
+      }
+
+      window.location.href = data.checkoutUrl
+    } catch (error) {
+      console.error('Checkout error:', error)
+      alert('Failed to start checkout. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (

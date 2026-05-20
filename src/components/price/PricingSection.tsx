@@ -9,6 +9,7 @@ const PricingSection = () => {
 
   return (
     <section className="px-5 py-15 max-w-5xl mx-auto text-center">
+
       <h2 className="mx-auto max-w-4xl text-4xl font-semibold text-slate-900 leading-tight sm:text-5xl lg:text-6xl">
         Simple, transparent pricing
       </h2>

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Header from '@/components/doc/Header'
 import FileUpload from '@/components/doc/FileUpload'
 import ResultModal from '@/components/doc/ResultModal'
+import Footer from '@/components/shared/Footer'
 
 
 const inter = Inter({
@@ -18,6 +19,7 @@ const Page = () => {
                 <Header />
                 <FileUpload />
                 <ResultModal />
+                <Footer />
             </section>
 
         </main>

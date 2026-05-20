@@ -20,7 +20,6 @@ const Page = () => {
     <div className={`${inter.className} `}>
       <Header />
       <Hero />
-      <Upload />
       <Process />
       <Features />
       <Benefits />

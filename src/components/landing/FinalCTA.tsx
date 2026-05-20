@@ -28,7 +28,7 @@ const FinalCTA = () => {
             </button>
 
             <p className="mt-4 text-sm text-white/80">
-              Free to try · No signup required
+              Free to try · No payement required
             </p>
           </div>
         </div>
