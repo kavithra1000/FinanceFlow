@@ -3,7 +3,6 @@ import { extractTextFromBuffer } from '@/utils/pdf-tools';
 import { cleanExtractedText } from '@/utils/clean-text';
 import { getStructuredData } from './ai-service';
 import type { TransactionRow } from '@/types/transaction';
-import { requiresOCR } from './ocr';
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 

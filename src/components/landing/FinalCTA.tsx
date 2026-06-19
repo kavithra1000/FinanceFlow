@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 
 const FinalCTA = () => {
   return (
-    <section className="mt-32 px-5">
+    <section className="my-32 px-5">
       <div className="mx-auto max-w-6xl">
         <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-emerald-600 to-green-600 p-12 sm:p-16 text-center">
 

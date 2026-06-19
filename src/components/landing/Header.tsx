@@ -2,11 +2,8 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Button } from '../ui/button'
 import { Menu, X } from 'lucide-react'
-import { SignUpButton } from '@clerk/nextjs'
-import { navigate } from 'next/dist/client/components/segment-cache/navigation'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -65,7 +62,7 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image alt="logo" src="/logo.png" width={28} height={28} />
-            <span className="text-lg font-extrabold text-slate-900 sm:text-xl">
+            <span className="text-lg font-semibold text-slate-900 sm:text-xl">
               FinanceFlow
             </span>
           </Link>
@@ -84,6 +81,12 @@ const Header = () => {
               className="text-sm font-medium text-gray-600 hover:text-black transition-colors duration-200"
             >
               Pricing
+            </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-gray-600 hover:text-black transition-colors duration-200"
+            >
+              Contact
             </Link>
 
             <Link href="/doc">
@@ -138,6 +141,14 @@ const Header = () => {
                   className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-200 px-2 py-1.5 rounded-lg hover:bg-gray-50"
                 >
                   Pricing
+                </Link>
+
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-medium text-gray-700 hover:text-black transition-colors duration-200 px-2 py-1.5 rounded-lg hover:bg-gray-50"
+                >
+                  Contact
                 </Link>
 
                 <div className="h-px bg-gray-100 my-1" />

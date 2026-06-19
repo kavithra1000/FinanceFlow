@@ -16,6 +16,7 @@ const Footer = () => {
         { name: 'Pricing', href: '/price' },
         { name: 'Converter', href: '/doc' },
         { name: 'Features', href: '/#features' },
+        { name: 'Contact', href: '/contact' },
       ],
     },
     {
@@ -30,10 +31,10 @@ const Footer = () => {
     {
       title: 'Legal',
       links: [
-        { name: 'Privacy Policy', href: '#' },
-        { name: 'Terms of Service', href: '#' },
-        { name: 'Cookie Policy', href: '#' },
-        { name: 'Security', href: '#' },
+        { name: 'Privacy Policy', href: '/privacy' },
+        { name: 'Terms of Service', href: '/terms' },
+        { name: 'Cookie Policy', href: '/cookies' },
+        { name: 'Security', href: '/security' },
       ],
     },
   ]
@@ -46,7 +47,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="w-full bg-slate-50 border-t border-slate-200 mt-20">
+    <footer className="w-full bg-slate-50 border-t border-slate-200 mt-0">
       <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           
@@ -54,7 +55,7 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="flex items-center gap-2">
               <Image alt="logo" src="/logo.png" width={32} height={32} />
-              <span className="text-xl font-extrabold text-slate-900 tracking-tight">
+              <span className="text-xl font-semibold text-slate-900 tracking-tight">
                 FinanceFlow
               </span>
             </Link>
@@ -108,8 +109,8 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-8">
             <Link href="#" className="text-xs text-slate-400 hover:text-slate-600 transition-colors"> Status </Link>
-            <Link href="#" className="text-xs text-slate-400 hover:text-slate-600 transition-colors"> Privacy </Link>
-            <Link href="#" className="text-xs text-slate-400 hover:text-slate-600 transition-colors"> Terms </Link>
+            <Link href="/privacy" className="text-xs text-slate-400 hover:text-slate-600 transition-colors"> Privacy </Link>
+            <Link href="/terms" className="text-xs text-slate-400 hover:text-slate-600 transition-colors"> Terms </Link>
           </div>
         </div>
       </div>

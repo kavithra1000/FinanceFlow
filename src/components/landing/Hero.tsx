@@ -99,7 +99,7 @@ export default function Hero() {
             />
 
             {/* ── Hero body ──────────────────────────────────────────────────────── */}
-            <section className="relative text-center px-5 overflow-hidden py-10 mt-10">
+            <section className="relative text-center px-5 overflow-hidden py-10 mt-12">
                 {/* Background Glow Decorations */}
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-green-200/10 blur-[120px] rounded-full -z-10" />
                 <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-emerald-100/20 blur-[100px] rounded-full -z-10" />

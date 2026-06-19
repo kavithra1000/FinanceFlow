@@ -2,7 +2,6 @@
 import { Inter } from 'next/font/google'
 import Header from '@/components/landing/Header'
 import Hero from '@/components/landing/Hero'
-import Upload from '@/components/landing/Upload'
 import Process from '@/components/landing/Process'
 import Features from '@/components/landing/Features'
 import Benefits from '@/components/landing/Benefits'
