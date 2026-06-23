@@ -3,7 +3,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata : Metadata = {
-  title: "Bank Statement to Excel Converter | FinanceFlow",
+  title: "Bank Statement to Excel Converter | FinzFlow",
   description:
     "Convert PDF bank statements into clean Excel or CSV files instantly. Supports multiple banks. Secure and fast.",
 };

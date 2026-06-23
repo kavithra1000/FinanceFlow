@@ -6,7 +6,7 @@ export const FreePlan = () => {
     <div className="border-2 border-emerald-600 rounded-2xl p-8 text-left bg-white">
       <h3 className="text-xl font-semibold text-slate-900">Free</h3>
       <p className="mt-2 text-slate-600">
-        Try FinanceFlow with basic limits.
+        Try FinzFlow with basic limits.
       </p>
 
       <div className="mt-6 text-4xl font-semibold text-slate-900">

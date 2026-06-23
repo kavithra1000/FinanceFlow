@@ -42,7 +42,7 @@ const Header = () => {
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image alt="logo" src="/logo.png" width={28} height={28} />
             <span className="text-lg font-extrabold text-slate-900 sm:text-xl">
-              FinanceFlow
+              FinzFlow
             </span>
           </Link>
 

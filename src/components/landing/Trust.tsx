@@ -16,7 +16,7 @@ const Trust = () => {
           </h2>
 
           <p className="mt-4 max-w-2xl mx-auto text-slate-600">
-            FinanceFlow is built with privacy-first principles.
+            FinzFlow is built with privacy-first principles.
             Your bank statements are processed securely and never stored.
           </p>
         </div>

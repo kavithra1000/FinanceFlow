@@ -4,8 +4,8 @@ import DocPageLayout from '@/components/shared/DocPageLayout'
 import { EyeOff, Database, Trash2, Users } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | FinanceFlow',
-  description: 'Learn how FinanceFlow collects, processes, and protects your financial data and bank statement PDFs.',
+  title: 'Privacy Policy | FinzFlow',
+  description: 'Learn how FinzFlow collects, processes, and protects your financial data and bank statement PDFs.',
 }
 
 export default function PrivacyPage() {
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
           Introduction
         </h2>
         <p>
-          Welcome to <strong className="text-slate-800">FinanceFlow</strong>. We operate an AI-powered bank statement
+          Welcome to <strong className="text-slate-800">FinzFlow</strong>. We operate an AI-powered bank statement
           converter platform. We are committed to protecting your personal and financial information.
           This Privacy Policy explains how we collect, process, secure, and automatically delete your
           bank statements and other information when you use our service.
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
         <div className="flex items-start gap-3 p-4 rounded-2xl border border-emerald-100 bg-emerald-50/60 text-emerald-800 text-sm">
           <EyeOff className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <p>
-            <strong>Privacy First:</strong> FinanceFlow is built with privacy-first principles. We do not
+            <strong>Privacy First:</strong> FinzFlow is built with privacy-first principles. We do not
             sell your transactions or financial data to third-party brokers, advertisers, or aggregators.
           </p>
         </div>

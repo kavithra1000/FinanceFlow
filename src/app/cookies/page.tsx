@@ -4,8 +4,8 @@ import DocPageLayout from '@/components/shared/DocPageLayout'
 import { Cookie, Settings, ShieldAlert } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy | FinanceFlow',
-  description: 'Understand how and why FinanceFlow uses cookies and tracking technologies on our website.',
+  title: 'Cookie Policy | FinzFlow',
+  description: 'Understand how and why FinzFlow uses cookies and tracking technologies on our website.',
 }
 
 export default function CookiesPage() {
@@ -46,7 +46,7 @@ export default function CookiesPage() {
           How We Use Cookies
         </h2>
         <p>
-          FinanceFlow uses cookies to recognize you when you sign in, protect your account against
+          FinzFlow uses cookies to recognize you when you sign in, protect your account against
           unauthorized access, remember your user settings, and analyze platform traffic to fix bugs
           and improve performance.
         </p>

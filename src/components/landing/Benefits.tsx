@@ -13,11 +13,11 @@ const Benefits = () => {
             </span>
 
             <h2 className="mt-4 text-3xl sm:text-4xl font-semibold text-slate-900">
-              Why choose FinanceFlow?
+              Why choose FinzFlow?
             </h2>
 
             <p className="mt-4 max-w-xl text-slate-600">
-              FinanceFlow removes the pain from processing bank statements —
+              FinzFlow removes the pain from processing bank statements —
               accurate results with zero manual work.
             </p>
 
@@ -69,7 +69,7 @@ const Benefits = () => {
 
               <div className="flex items-center justify-between border-b border-white/20 pb-4">
                 <span className="text-sm font-medium text-white">
-                  With FinanceFlow
+                  With FinzFlow
                 </span>
                 <span className="text-xl font-semibold text-white">
                   ~30 seconds

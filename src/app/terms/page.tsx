@@ -4,8 +4,8 @@ import DocPageLayout from '@/components/shared/DocPageLayout'
 import { FileText, CreditCard, ShieldAlert, AlertTriangle } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | FinanceFlow',
-  description: 'Understand the terms, guidelines, and rules for using the FinanceFlow bank statement converter platform.',
+  title: 'Terms of Service | FinzFlow',
+  description: 'Understand the terms, guidelines, and rules for using the FinzFlow bank statement converter platform.',
 }
 
 export default function TermsPage() {
@@ -24,7 +24,7 @@ export default function TermsPage() {
       title="Terms of"
       highlight="Service."
       badge="Legal · Clear & fair terms"
-      description="Please read these terms carefully before using FinanceFlow. They outline your rights and our mutual obligations."
+      description="Please read these terms carefully before using FinzFlow. They outline your rights and our mutual obligations."
       lastUpdated="May 20, 2026"
       fileLabel="terms_of_service.tsx"
       toc={toc}
@@ -36,7 +36,7 @@ export default function TermsPage() {
           Acceptance of Terms
         </h2>
         <p>
-          By accessing, signing up for, or using FinanceFlow&apos;s website, tools, and services, you agree
+          By accessing, signing up for, or using FinzFlow&apos;s website, tools, and services, you agree
           to be bound by these Terms of Service and our Privacy Policy. If you do not agree to all of these
           terms, you do not have permission to access or use our services.
         </p>
@@ -49,7 +49,7 @@ export default function TermsPage() {
           Description of Service
         </h2>
         <p>
-          FinanceFlow operates an AI-powered data processing platform designed to parse digital and scanned
+          FinzFlow operates an AI-powered data processing platform designed to parse digital and scanned
           bank statement documents (primarily PDFs) and convert them into structured spreadsheets (Excel, CSV).
           We reserve the right to modify, suspend, or discontinue any aspect of our services at any time
           without prior notice.
@@ -103,7 +103,7 @@ export default function TermsPage() {
           <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 text-xs font-bold shrink-0">5</span>
           Subscriptions &amp; Payments
         </h2>
-        <p>FinanceFlow offers both free and paid premium subscription tiers.</p>
+        <p>FinzFlow offers both free and paid premium subscription tiers.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             {
@@ -140,7 +140,7 @@ export default function TermsPage() {
         </h2>
         <p>
           THE SERVICES ARE PROVIDED ON AN &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; BASIS.
-          FINANCEFLOW DISCLAIMS ALL WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY
+          FINZFLOW DISCLAIMS ALL WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY
           AND FITNESS FOR A PARTICULAR PURPOSE.
         </p>
         <div className="group rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-sm shadow-sm p-5">
@@ -167,7 +167,7 @@ export default function TermsPage() {
           Limitation of Liability
         </h2>
         <p>
-          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FINANCEFLOW SHALL NOT BE LIABLE FOR ANY
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FINZFLOW SHALL NOT BE LIABLE FOR ANY
           INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR
           GOODWILL RESULTING FROM YOUR USE OF THE SERVICE OR ANY INACCURATE CONVERSIONS.
         </p>

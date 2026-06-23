@@ -4,9 +4,9 @@ import ContactSection from '@/components/contact/ContactSection'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Us – FinanceFlow',
+  title: 'Contact Us – FinzFlow',
   description:
-    'Get in touch with the FinanceFlow team. We reply within 24 hours. Reach us at support@puretextclean.com.',
+    'Get in touch with the FinzFlow team. We reply within 24 hours. Reach us at support@puretextclean.com.',
 }
 
 const ContactPage = () => {

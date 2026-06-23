@@ -56,7 +56,7 @@ const Footer = () => {
             <Link href="/" className="flex items-center gap-2">
               <Image alt="logo" src="/logo.png" width={32} height={32} />
               <span className="text-xl font-semibold text-slate-900 tracking-tight">
-                FinanceFlow
+                FinzFlow
               </span>
             </Link>
             <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 lg:mt-24 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="text-sm text-slate-500">
-            © {currentYear} FinanceFlow Inc. All rights reserved. 
+            © {currentYear} FinzFlow Inc. All rights reserved. 
             <span className="hidden sm:inline mx-2 text-slate-300">|</span> 
             Made with <span className="text-rose-500">♥</span> globally.
           </p>

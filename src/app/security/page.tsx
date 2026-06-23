@@ -4,8 +4,8 @@ import DocPageLayout from '@/components/shared/DocPageLayout'
 import { ShieldCheck, Lock, Trash2, Server, UserCheck, Mail } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Security | FinanceFlow',
-  description: 'Learn about the advanced security infrastructure, encryption, and deletion protocols protecting your financial statements on FinanceFlow.',
+  title: 'Security | FinzFlow',
+  description: 'Learn about the advanced security infrastructure, encryption, and deletion protocols protecting your financial statements on FinzFlow.',
 }
 
 export default function SecurityPage() {
@@ -35,14 +35,14 @@ export default function SecurityPage() {
           Security Overview
         </h2>
         <p>
-          At FinanceFlow, we recognize that bank statements contain highly sensitive financial information.
+          At FinzFlow, we recognize that bank statements contain highly sensitive financial information.
           Security is a core requirement in every feature we ship — not an afterthought.
         </p>
         <div className="flex items-start gap-3 p-4 rounded-2xl border border-emerald-100 bg-emerald-50/60 text-emerald-800 text-sm">
           <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <p>
             <strong>Zero Storage Commitment:</strong> We do not build permanent transaction profiles or
-            aggregate your banking records. FinanceFlow is designed to be a temporary utility — we parse,
+            aggregate your banking records. FinzFlow is designed to be a temporary utility — we parse,
             convert, and delete.
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function SecurityPage() {
           <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 text-xs font-bold shrink-0">4</span>
           Hosting &amp; Infrastructure
         </h2>
-        <p>FinanceFlow is hosted on leading, secure cloud platforms (primarily AWS and Vercel).</p>
+        <p>FinzFlow is hosted on leading, secure cloud platforms (primarily AWS and Vercel).</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             {
@@ -175,7 +175,7 @@ export default function SecurityPage() {
           Vulnerability Disclosure
         </h2>
         <p>
-          If you believe you have discovered a security vulnerability in FinanceFlow, please do not exploit
+          If you believe you have discovered a security vulnerability in FinzFlow, please do not exploit
           it publicly. Contact us immediately so we can coordinate a fix responsibly.
         </p>
         <div className="group rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-emerald-200 transition-all duration-300 p-5">
