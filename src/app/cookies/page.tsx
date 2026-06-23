@@ -63,7 +63,7 @@ export default function CookiesPage() {
             {
               category: 'Strictly Necessary',
               purpose: 'Required for signing in, checking account authorization, and securing checkout.',
-              example: '__session / Clerk, stripe.com',
+              example: '__session / Clerk, lemonsqueezy.com',
               color: 'text-emerald-700 bg-emerald-50',
             },
             {
@@ -137,8 +137,8 @@ export default function CookiesPage() {
         </div>
         <p className="text-sm">
           Questions about our use of cookies? Contact us at{' '}
-          <a href="mailto:support@financeflow.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
-            support@financeflow.com
+          <a href="mailto:support@puretextclean.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
+            support@puretextclean.com
           </a>.
         </p>
       </section>

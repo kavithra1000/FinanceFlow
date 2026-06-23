@@ -113,10 +113,10 @@ export default function ContactSection() {
               <div>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email us</p>
                 <a
-                  href="mailto:support@financeflow.com"
+                  href="mailto:support@puretextclean.com"
                   className="text-sm font-semibold text-slate-800 hover:text-emerald-600 transition-colors break-all"
                 >
-                  support@financeflow.com
+                  support@puretextclean.com
                 </a>
                 <p className="mt-1 text-xs text-slate-400">For general inquiries &amp; support</p>
               </div>

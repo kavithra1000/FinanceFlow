@@ -4,9 +4,10 @@ const LEMONSQUEEZY_API_URL = 'https://api.lemonsqueezy.com/v1/checkout_sessions'
 
 export async function POST(req: NextRequest) {
   try {
-    const { billing, customerEmail } = (await req.json()) as {
+    const { billing, customerEmail, userId } = (await req.json()) as {
       billing: 'monthly' | 'yearly'
       customerEmail?: string
+      userId?: string
     }
 
     if (!billing || !['monthly', 'yearly'].includes(billing)) {
@@ -38,6 +39,9 @@ export async function POST(req: NextRequest) {
           attributes: {
             variant_id: variantId,
             customer_email: customerEmail,
+            custom: {
+              userId: userId,
+            },
             return_url: `${appUrl}/price?checkout=success`,
             cancel_url: `${appUrl}/price?checkout=cancel`,
           },

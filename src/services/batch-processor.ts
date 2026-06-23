@@ -7,12 +7,9 @@ import type { TransactionRow } from '@/types/transaction';
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 export async function processFilesBatch(files: File[]): Promise<{ success: TransactionRow[]; failed: { fileName: string; error: string }[] }> {
-  const allTransactions: TransactionRow[] = [];
-  const failedFiles: { fileName: string; error: string }[] = [];
-
-  for (const [index, file] of files.entries()) {
+  const tasks = files.map(async (file) => {
     try {
-      console.log(`Processing ${file.name} (${index + 1}/${files.length})`);
+      console.log(`Processing ${file.name}`);
 
       const buffer = Buffer.from(await file.arrayBuffer());
       const rawText = await extractTextFromBuffer(buffer);
@@ -32,24 +29,36 @@ export async function processFilesBatch(files: File[]): Promise<{ success: Trans
         }));
 
       if (valid.length > 0) {
-        allTransactions.push(...valid); // Add to successful transactions
+        return { type: 'success' as const, data: valid };
       } else {
-        // If no valid transactions were found, mark as failure
-        failedFiles.push({
+        return {
+          type: 'failed' as const,
           fileName: file.name,
           error: 'No valid transactions found in the file.',
-        });
+        };
       }
-
-      // Delay between processing files
-      if (index < files.length - 1) await delay(1500);
-
     } catch (error) {
       console.error(`Failed ${file.name}`, error);
-      // Log any unexpected errors with the file
-      failedFiles.push({
+      return {
+        type: 'failed' as const,
         fileName: file.name,
         error: error instanceof Error ? error.message : 'Unknown error',
+      };
+    }
+  });
+
+  const results = await Promise.all(tasks);
+
+  const allTransactions: TransactionRow[] = [];
+  const failedFiles: { fileName: string; error: string }[] = [];
+
+  for (const res of results) {
+    if (res.type === 'success') {
+      allTransactions.push(...res.data);
+    } else {
+      failedFiles.push({
+        fileName: res.fileName,
+        error: res.error,
       });
     }
   }

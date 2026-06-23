@@ -9,6 +9,7 @@ import FileListCard from './FileListCard'
 import ErrorMessage from './ErrorMessage'
 import { usePdfStore } from '@/stores/usePdfStore'
 import { useResultStore } from '@/stores/useResultStore'
+import { useUser } from '@clerk/nextjs'
 
 const FileUpload = () => {
   // -------------------- PDF Store --------------------
@@ -21,6 +22,20 @@ const FileUpload = () => {
 
   // -------------------- Result Store --------------------
   const setResult = useResultStore(state => state.setResult)
+
+  // -------------------- Clerk & Plan Integration --------------------
+  const { user } = useUser()
+  const isPro = user?.publicMetadata?.isPro === true
+
+  React.useEffect(() => {
+    if (isPro) {
+      // 50 files limit for Pro plan, 100MB max per file
+      usePdfStore.setState({ MAX_FILES: 50, MAX_FILE_SIZE_MB: 100 })
+    } else {
+      // 10 files limit for Free plan, 50MB max per file
+      usePdfStore.setState({ MAX_FILES: 10, MAX_FILE_SIZE_MB: 50 })
+    }
+  }, [isPro])
 
   // -------------------- Handlers --------------------
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,10 +89,17 @@ const FileUpload = () => {
         <div className="text-center max-w-4xl mb-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
           {/* Badge */}
           <div className="mb-6 rounded-full inline-flex bg-emerald-100 px-4 py-1 text-sm font-medium text-emerald-700">
-            <p className="animate-pulse inline-flex items-center gap-2">
-              <LuSparkles className="h-4 w-4" />
-              AI-Powered Extraction
-            </p>
+            {isPro ? (
+              <p className="animate-pulse inline-flex items-center gap-2">
+                <LuSparkles className="h-4 w-4" />
+                Pro Tier Active: 50 Files & 100MB Limits
+              </p>
+            ) : (
+              <p className="animate-pulse inline-flex items-center gap-2">
+                <LuSparkles className="h-4 w-4" />
+                AI-Powered Extraction
+              </p>
+            )}
           </div>
 
           <h1 className="text-4xl sm:text-3xl lg:text-6xl font-semibold text-slate-900 leading-tight mb-6">
@@ -136,7 +158,9 @@ const FileUpload = () => {
                   </span>
                 </button>
                 <p className="text-center text-xs text-gray-500">
-                  Multiple statements will be consolidated into a single Excel file.
+                  {isPro 
+                    ? 'Pro limits applied. Multiple statements will be consolidated.' 
+                    : 'Multiple statements will be consolidated into a single Excel file.'}
                 </p>
               </div>
             )}

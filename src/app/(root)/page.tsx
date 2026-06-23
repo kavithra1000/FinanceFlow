@@ -1,5 +1,4 @@
 
-import { Inter } from 'next/font/google'
 import Header from '@/components/landing/Header'
 import Hero from '@/components/landing/Hero'
 import Process from '@/components/landing/Process'
@@ -9,14 +8,9 @@ import Trust from '@/components/landing/Trust'
 import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/landing/Footer'
 
-const inter = Inter({
-  weight: ['400', '600'],
-  subsets: ['latin'],
-})
-
 const Page = () => {
   return (
-    <div className={`${inter.className} `}>
+    <div className="font-sans">
       <Header />
       <Hero />
       <Process />

@@ -185,8 +185,8 @@ export default function SecurityPage() {
             </div>
             <div>
               <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Report a Vulnerability</p>
-              <a href="mailto:security@financeflow.com" className="text-sm font-semibold text-slate-800 hover:text-emerald-600 transition-colors">
-                security@financeflow.com
+              <a href="mailto:security@puretextclean.com" className="text-sm font-semibold text-slate-800 hover:text-emerald-600 transition-colors">
+                security@puretextclean.com
               </a>
               <p className="mt-1 text-xs text-slate-400">We review reports within 48 hours and coordinate standard disclosure timelines.</p>
             </div>

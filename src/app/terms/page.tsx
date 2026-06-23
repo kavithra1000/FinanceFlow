@@ -109,7 +109,7 @@ export default function TermsPage() {
             {
               icon: CreditCard,
               label: 'Billing & Processing',
-              body: 'Paid plans are billed on a recurring monthly or annual basis via Stripe. Payments are non-refundable except as required by law.',
+              body: 'Paid plans are billed on a recurring monthly or annual basis via Lemon Squeezy. Payments are non-refundable except as required by law.',
             },
             {
               icon: FileText,
@@ -173,8 +173,8 @@ export default function TermsPage() {
         </p>
         <p className="text-sm">
           Questions about these Terms? Contact us at{' '}
-          <a href="mailto:support@financeflow.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
-            support@financeflow.com
+          <a href="mailto:support@puretextclean.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
+            support@puretextclean.com
           </a>.
         </p>
       </section>

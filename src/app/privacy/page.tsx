@@ -150,7 +150,7 @@ export default function PrivacyPage() {
         <p>We use trusted services under strict contractual data-protection obligations:</p>
         <ul className="space-y-2.5 pl-5 list-disc">
           <li><strong className="text-slate-800">Clerk</strong> — secure sign-in and user authentication.</li>
-          <li><strong className="text-slate-800">Stripe</strong> — subscription billing. We never store card numbers.</li>
+          <li><strong className="text-slate-800">Lemon Squeezy</strong> — secure subscription billing. We never store card numbers.</li>
           <li><strong className="text-slate-800">AWS / Vercel</strong> — web hosting and temporary encrypted file storage.</li>
         </ul>
       </section>
@@ -169,8 +169,8 @@ export default function PrivacyPage() {
         </ul>
         <p className="text-sm">
           To exercise any of these rights, email us at{' '}
-          <a href="mailto:support@financeflow.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
-            support@financeflow.com
+          <a href="mailto:support@puretextclean.com" className="text-emerald-600 hover:text-emerald-700 font-semibold underline underline-offset-4 transition-colors">
+            support@puretextclean.com
           </a>. We respond within 3 business days.
         </p>
       </section>

@@ -6,6 +6,27 @@ const client = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!
 });
 
+const transactionSchema = {
+  type: 'object',
+  properties: {
+    transactions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          date: { type: 'string', description: 'The transaction date in YYYY-MM-DD format.' },
+          description: { type: 'string', description: 'Details or description of the transaction.' },
+          debit: { type: 'number', description: 'Debit amount (outgoing/withdrawn money). Set to 0 if none.' },
+          credit: { type: 'number', description: 'Credit amount (incoming/deposited money). Set to 0 if none.' },
+          balance: { type: 'number', description: 'Running balance after the transaction. Set to 0 if none.' },
+        },
+        required: ['date', 'description', 'debit', 'credit', 'balance'],
+      },
+    },
+  },
+  required: ['transactions'],
+};
+
 export async function getStructuredData(
   rawText: string,
   fileBuffer?: Buffer,
@@ -14,12 +35,7 @@ export async function getStructuredData(
   try {
     const parts: any[] = [
       {
-        text: `You are a bank statement parser. Extract ALL transactions into a JSON array.
-               Rules:
-               1. Return ONLY a JSON object with key "transactions".
-               2. Each transaction: {"date": "YYYY-MM-DD", "description": "text", "debit": number, "credit": number, "balance": number}.
-               3. Use 0 if a debit or credit value is missing.
-               4. For scanned documents, use your visual capability to read the text accurately.`
+        text: `You are a bank statement parser. Extract ALL transactions from the provided content into the requested schema.`
       }
     ];
 
@@ -43,6 +59,7 @@ export async function getStructuredData(
       }],
       config: {
         responseMimeType: 'application/json',
+        responseJsonSchema: transactionSchema,
       }
     });
 

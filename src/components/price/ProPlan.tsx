@@ -11,6 +11,9 @@ export const ProPlan = ({ billing }: { billing: "monthly" | "yearly" }) => {
   const { user } = useUser()
   const price = billing === "monthly" ? "$9" : "$79"
 
+  const isPro = user?.publicMetadata?.isPro === true
+  const customerPortalUrl = user?.publicMetadata?.customerPortalUrl as string | undefined
+
   const handleUpgrade = async () => {
     if (!user) return alert("Please log in first")
 
@@ -21,7 +24,7 @@ export const ProPlan = ({ billing }: { billing: "monthly" | "yearly" }) => {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ billing, customerEmail }),
+        body: JSON.stringify({ billing, customerEmail, userId: user.id }),
       })
 
       const data = await response.json()
@@ -46,12 +49,19 @@ export const ProPlan = ({ billing }: { billing: "monthly" | "yearly" }) => {
       </span>
 
       {/* Plan Title */}
-      <h3 className="text-xl font-semibold flex items-center gap-2">
-        Pro
-        <FiInfo
-          className="w-4 h-4 cursor-pointer hover:text-emerald-300"
-          onClick={() => setShowInfo(!showInfo)}
-        />
+      <h3 className="text-xl font-semibold flex items-center justify-between gap-2">
+        <span className="flex items-center gap-2">
+          Pro
+          <FiInfo
+            className="w-4 h-4 cursor-pointer hover:text-emerald-300"
+            onClick={() => setShowInfo(!showInfo)}
+          />
+        </span>
+        {isPro && (
+          <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse uppercase">
+            Active Plan
+          </span>
+        )}
       </h3>
 
       {/* Tooltip / Modal */}
@@ -102,13 +112,28 @@ export const ProPlan = ({ billing }: { billing: "monthly" | "yearly" }) => {
       </ul>
 
       {/* Upgrade Button */}
-      <Button
-        onClick={handleUpgrade}
-        disabled={loading}
-        className="mt-8 w-full font-semibold shadow-md bg-white text-emerald-700 hover:bg-emerald-50 cursor-pointer disabled:opacity-50"
-      >
-        {loading ? "Redirecting..." : "Upgrade to Pro"}
-      </Button>
+      {isPro ? (
+        <Button
+          onClick={() => {
+            if (customerPortalUrl) {
+              window.open(customerPortalUrl, '_blank')
+            } else {
+              alert("Your portal link is not ready yet. Try again in a moment, or contact support.")
+            }
+          }}
+          className="mt-8 w-full font-semibold shadow-md bg-white text-emerald-700 hover:bg-emerald-50 cursor-pointer"
+        >
+          Manage Subscription
+        </Button>
+      ) : (
+        <Button
+          onClick={handleUpgrade}
+          disabled={loading}
+          className="mt-8 w-full font-semibold shadow-md bg-white text-emerald-700 hover:bg-emerald-50 cursor-pointer disabled:opacity-50"
+        >
+          {loading ? "Redirecting..." : "Upgrade to Pro"}
+        </Button>
+      )}
     </div>
   )
 }
